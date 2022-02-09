@@ -1,7 +1,7 @@
 # LiveSplit.Ultimate-DOOM
 Autosplitter for almost every speedrunning source ports
 
-## Instalation
+## Installation
  1. Download https://github.com/rogender/LiveSplit.Ultimate-DOOM/blob/main/LiveSplit.Ultimate-DOOM.asl
  2. Rightclick on livesplit
  3. Edit layout
