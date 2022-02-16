@@ -67,7 +67,7 @@ init
     else
     {
         version = "UNDETECTED";
-        MessageBox.Show(timer.Form, "Ultimate-Doom autosplitter startup failure. I could not recognize what the version of the game you are running", "Ultimate-Doom startup failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        MessageBox.Show(timer.Form, "Ultimate-Doom autosplitter startup failure. I could not recognize what the version of the game you are running", "Ultimate-Doom autosplitter startup failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 
     vars.timerRunning = 0;
