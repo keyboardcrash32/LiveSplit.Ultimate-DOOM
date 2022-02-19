@@ -7,6 +7,7 @@ state("crispy-doom")
     int menuvalue:              "crispy-doom.exe", 0x19E560;
     int playerHealth:           "crispy-doom.exe", 0x19EAAC;
     int levelTime:              "crispy-doom.exe", 0x10BB70;
+    int chapter:                "crispy-doom.exe", 0x19E68C;
 }
 
 state("chocolate-doom")
@@ -15,6 +16,7 @@ state("chocolate-doom")
     int menuvalue:              "chocolate-doom.exe", 0x11A31C;
     int playerHealth:           "chocolate-doom.exe", 0x5F394;
     int levelTime:              "chocolate-doom.exe", 0x1254F0;
+    int chapter:                "chocolate-doom.exe", 0x1236F4;
 }
 
 state("glboom-plus")
@@ -23,6 +25,7 @@ state("glboom-plus")
     int menuvalue:              "glboom-plus.exe", 0x215818;
     int playerHealth:           "glboom-plus.exe", 0x1B9180;
 	int levelTime:              "glboom-plus.exe", 0x215020;
+    int chapter:                "glboom-plus.exe", 0x1A2FD8;
 }
 
 state("prboom-plus")
@@ -31,6 +34,7 @@ state("prboom-plus")
     int menuvalue:              "prboom-plus.exe", 0x175A70;
     int playerHealth:           "prboom-plus.exe", 0x16C814;
     int levelTime:              "prboom-plus.exe", 0x1DB164;
+    int chapter:                "prboom-plus.exe", 0x16C7F0;
 }
 
 state("cndoom")
@@ -39,16 +43,20 @@ state("cndoom")
     int menuvalue:              "cndoom.exe", 0x117BD8;
     int playerHealth:           "cndoom.exe", 0x63934;
     int levelTime:              "cndoom.exe", 0x129890;
+    int chapter:                "cndoom.exe", 0x117A34;
 }
 
 startup
 {
-    settings.Add("Enable autosplitter");
-    settings.CurrentDefaultParent = "Enable autosplitter";
-    settings.Add("Start");
-    settings.Add("Reset");
-    settings.Add("Split");
-    settings.Add("Load-Removal");
+    settings.Add("enablesplit", true, "Enable autosplitter");
+    settings.Add("misc", false, "Misc.");
+    settings.CurrentDefaultParent = "enablesplit";
+    settings.Add("start", true, "Start");
+    settings.Add("reset", true, "Reset");
+    settings.Add("split", true, "Split");
+    settings.Add("lr", true, "Load-Removal");
+    settings.CurrentDefaultParent = "misc";
+    settings.Add("chaptersplit", false, "Splitting chapters only");
 }
 
 init
@@ -67,7 +75,7 @@ init
     else
     {
         version = "UNDETECTED";
-        MessageBox.Show(timer.Form, "Ultimate-Doom autosplitter startup failure. I could not recognize what the version of the game you are running", "Ultimate-Doom autosplitter startup failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        MessageBox.Show(timer.Form, "Ultimate-Doom autosplitter startup failure. I could not recognize what the version of the game you are running", "Ultimate-Doom startup failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 
     vars.timerRunning = 0;
@@ -78,7 +86,7 @@ init
 
 start
 {
-    if(current.map == 1 && current.menuvalue == 0 && vars.timerRunning == 0 && current.playerHealth != 0 && settings["Start"])
+    if(current.map == 1 && current.menuvalue == 0 && vars.timerRunning == 0 && current.playerHealth != 0 && settings["start"])
     {
         vars.timerRunning = 1;
         vars.splitsCurrent = 0;
@@ -90,7 +98,12 @@ start
 
 split
 {
-    if(current.map > old.map && settings["Split"])
+    if(current.map > old.map && settings["split"] && !settings["chaptersplit"])
+    {
+        vars.splitsTemp = vars.splitsTotal;
+        return true;
+    }
+    if(current.chapter > old.chapter && settings["chaptersplit"] && settings["split"])
     {
         vars.splitsTemp = vars.splitsTotal;
         return true;
@@ -99,17 +112,17 @@ split
 
 reset
 {
-    if(current.map < old.map && settings["Reset"])
+    if(current.map < old.map && settings["reset"])
     {
         vars.timerRunning = 0;
         return true;
     }
-    if(current.playerHealth == 0 && settings["Reset"])
+    if(current.playerHealth == 0 && settings["reset"])
     {
         vars.timerRunning = 0;
         return true;
     }
-    if(current.map == 1 && current.levelTime < old.levelTime && settings["Reset"])
+    if(current.map == 1 && current.levelTime < old.levelTime && settings["reset"])
     {
         vars.timerRunning = 0;
         return true;
@@ -118,7 +131,7 @@ reset
 
 isLoading
 {
-    if(current.levelTime == old.levelTime)
+    if(current.levelTime == old.levelTime && settings["lr"])
     {
         return true;
     } else{
