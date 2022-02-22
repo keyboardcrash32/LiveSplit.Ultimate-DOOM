@@ -24,7 +24,7 @@ state("glboom-plus")
     int map:                    "glboom-plus.exe", 0x1A2FD4;
     int menuvalue:              "glboom-plus.exe", 0x215818;
     int playerHealth:           "glboom-plus.exe", 0x1B9180;
-	int levelTime:              "glboom-plus.exe", 0x215020;
+    int levelTime:              "glboom-plus.exe", 0x215020;
     int chapter:                "glboom-plus.exe", 0x1A2FD8;
 }
 
