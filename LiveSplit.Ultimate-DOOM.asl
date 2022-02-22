@@ -61,8 +61,8 @@ startup
 
 init
 {
-    // var mms = modules.First().ModuleMemorySize;
-    // print("0x" + mms.ToString("X"));
+    var mms = modules.First().ModuleMemorySize;
+    print("0x" + mms.ToString("X"));
 
     if(modules.First().ModuleMemorySize == 0x165000)
         version = "3.0.1";
@@ -98,7 +98,7 @@ start
 
 split
 {
-    if(current.map > old.map && settings["split"] && !settings["chaptersplit"])
+    if((current.map > old.map || current.chapter > old.chapter) && settings["split"] && !settings["chaptersplit"])
     {
         vars.splitsTemp = vars.splitsTotal;
         return true;
