@@ -61,21 +61,18 @@ startup
 
 init
 {
-    var mms = modules.First().ModuleMemorySize;
-    print("0x" + mms.ToString("X"));
+    // var mms = modules.First().ModuleMemorySize;
+    // print("0x" + mms.ToString("X"));
 
-    if(modules.First().ModuleMemorySize == 0x165000)
-        version = "3.0.1";
-    else if(modules.First().ModuleMemorySize == 0x390000)
-        version = "5.10.3";
-    else if(modules.First().ModuleMemorySize == 0x284000 || modules.First().ModuleMemorySize == 0x24A000)
-        version = "2.5.1.4";
-    else if(modules.First().ModuleMemorySize == 0x6C0000)
-        version = "2.0.3.2";
-    else
+    switch(modules.First().ModuleMemorySize)
     {
-        version = "UNDETECTED";
-        MessageBox.Show(timer.Form, "Ultimate-Doom autosplitter startup failure. I could not recognize what the version of the game you are running", "Ultimate-Doom startup failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        case(0x165000): version = "3.0.1";      break;
+        case(0x390000): version = "5.10.3";     break;
+        case(0x284000): version = "2.5.1.4";    break;
+        case(0x24A000): version = "2.5.1.4";    break;
+        case(0x6C0000): version = "2.0.3.2";    break;
+
+        default:        version = "UNDETECTED"; MessageBox.Show(timer.Form, "Ultimate-Doom autosplitter startup failure. \nI could not recognize what the version of the game you are running", "Ultimate-Doom startup failure", MessageBoxButtons.OK, MessageBoxIcon.Error); break;
     }
 
     vars.timerRunning = 0;
