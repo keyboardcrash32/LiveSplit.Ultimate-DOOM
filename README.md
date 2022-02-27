@@ -12,7 +12,7 @@ If you have any questions then feel free to write them to me(Discord - keyboardc
  4. Activate the splitter by clicking the "Activate" button beside the Splitter information text
 
 **Second way (manual method):**
- 1. Download the splitter from https://github.com/rogender/LiveSplit.Ultimate-DOOM/blob/master/LiveSplit.Ultimate-DOOM.asl
+ 1. Download the splitter from https://github.com/rogender/LiveSplit.Ultimate-DOOM/blob/main/LiveSplit.Ultimate-DOOM.asl
  2. Right click Livesplit
  3. Select "Edit Layout"
  4. Click on Add (plus sign) -> Control -> Scriptable Auto Splitter
