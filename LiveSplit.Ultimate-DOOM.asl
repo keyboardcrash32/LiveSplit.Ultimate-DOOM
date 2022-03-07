@@ -8,6 +8,7 @@ state("crispy-doom")
     int playerHealth:           "crispy-doom.exe", 0x19EAAC;
     int levelTime:              "crispy-doom.exe", 0x10BB70;
     int chapter:                "crispy-doom.exe", 0x19E68C;
+    int endChapter:             "crispy-doom.exe", 0x19EB54;
 }
 
 state("chocolate-doom")
@@ -95,12 +96,12 @@ start
 
 split
 {
-    if((current.map > old.map || current.chapter > old.chapter) && settings["split"] && !settings["chaptersplit"])
+    if((current.map > old.map || current.chapter > old.chapter || current.endChapter == 1) && settings["split"] && !settings["chaptersplit"])
     {
         vars.splitsTemp = vars.splitsTotal;
         return true;
     }
-    if(current.chapter > old.chapter && settings["chaptersplit"] && settings["split"])
+    if((current.chapter > old.chapter || current.endChapter == 1) && settings["chaptersplit"] && settings["split"])
     {
         vars.splitsTemp = vars.splitsTotal;
         return true;
