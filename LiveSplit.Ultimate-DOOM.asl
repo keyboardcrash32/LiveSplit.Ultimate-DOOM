@@ -3,12 +3,11 @@
 
 state("crispy-doom")
 {
-    int map:                    "crispy-doom.exe", 0x19F11C;
-    int menuvalue:              "crispy-doom.exe", 0x19E560;
-    int playerHealth:           "crispy-doom.exe", 0x19EAAC;
-    int levelTime:              "crispy-doom.exe", 0x10BB70;
-    int chapter:                "crispy-doom.exe", 0x19E68C;
-    int endChapter:             "crispy-doom.exe", 0x19EB54;
+    int map:                    "crispy-doom.exe", 0x1A01CC;
+    int menuvalue:              "crispy-doom.exe", 0x1A1890;
+    int playerHealth:           "crispy-doom.exe", 0xAA2D4;
+    int levelTime:              "crispy-doom.exe", 0x1B2560;
+    int chapter:                "crispy-doom.exe", 0x19F76C;
 }
 
 state("chocolate-doom")
@@ -62,19 +61,20 @@ startup
 
 init
 {
-    // var mms = modules.First().ModuleMemorySize;
-    // print("0x" + mms.ToString("X"));
+    var mms = modules.First().ModuleMemorySize;
+    print("0x" + mms.ToString("X"));
 
     switch(modules.First().ModuleMemorySize)
     {
         case(0x165000): version = "3.0.1";      break;
-        case(0x390000): version = "5.10.3";     break;
+        case(0x391000): version = "5.11.1";     break;
         case(0x284000): version = "2.5.1.4";    break;
         case(0x24A000): version = "2.5.1.4";    break;
         case(0x6C0000): version = "2.0.3.2";    break;
 
         default:        version = "UNDETECTED"; MessageBox.Show(timer.Form, "Ultimate-Doom autosplitter startup failure. \nI could not recognize what the version of the game you are running", "Ultimate-Doom startup failure", MessageBoxButtons.OK, MessageBoxIcon.Error); break;
     }
+
 
     vars.timerRunning = 0;
 	vars.splitsCurrent = 0;
@@ -96,12 +96,12 @@ start
 
 split
 {
-    if((current.map > old.map || current.chapter > old.chapter || current.endChapter == 1) && settings["split"] && !settings["chaptersplit"])
+    if((current.map > old.map || current.chapter > old.chapter) && settings["split"] && !settings["chaptersplit"])
     {
         vars.splitsTemp = vars.splitsTotal;
         return true;
     }
-    if((current.chapter > old.chapter || current.endChapter == 1) && settings["chaptersplit"] && settings["split"])
+    if(current.chapter > old.chapter && settings["chaptersplit"] && settings["split"])
     {
         vars.splitsTemp = vars.splitsTotal;
         return true;
