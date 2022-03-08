@@ -61,8 +61,7 @@ startup
 
 init
 {
-    var mms = modules.First().ModuleMemorySize;
-    print("0x" + mms.ToString("X"));
+    // print("ModuleSize - 0x" + (modules.First().ModuleMemorySize).ToString("X"));
 
     switch(modules.First().ModuleMemorySize)
     {
