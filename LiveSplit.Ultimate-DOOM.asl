@@ -6,7 +6,7 @@ state("crispy-doom")
     int map:                    "crispy-doom.exe", 0x1A01CC;
     int menuvalue:              "crispy-doom.exe", 0x1A1890;
     int playerHealth:           "crispy-doom.exe", 0xAA2D4;
-    int levelTime:              "crispy-doom.exe", 0x1B2560;
+    int levelTime:              "crispy-doom.exe", 0x10CB70;
     int chapter:                "crispy-doom.exe", 0x19F76C;
 }
 
@@ -30,11 +30,11 @@ state("glboom-plus")
 
 state("prboom-plus")
 {
-    int map:                    "prboom-plus.exe", 0x16C7EC;
-    int menuvalue:              "prboom-plus.exe", 0x175A70;
-    int playerHealth:           "prboom-plus.exe", 0x16C814;
-    int levelTime:              "prboom-plus.exe", 0x1DB164;
-    int chapter:                "prboom-plus.exe", 0x16C7F0;
+    int map:                    "prboom-plus.exe", 0x115988;
+    int menuvalue:              "prboom-plus.exe", 0x18D310;
+    int playerHealth:           "prboom-plus.exe", 0x19A66C;
+    int levelTime:              "prboom-plus.exe", 0x192318;
+    int chapter:                "prboom-plus.exe", 0x16CD38;
 }
 
 state("cndoom")
@@ -61,20 +61,20 @@ startup
 
 init
 {
-    // print("ModuleSize - 0x" + (modules.First().ModuleMemorySize).ToString("X"));
+    print("ModuleMemorySize - 0x" + (modules.First().ModuleMemorySize).ToString("X"));
 
     switch(modules.First().ModuleMemorySize)
     {
         case(0x165000): version = "3.0.1";      break;
         case(0x391000): version = "5.11.1";     break;
-        case(0x284000): version = "2.5.1.4";    break;
-        case(0x24A000): version = "2.5.1.4";    break;
+        case(0x284000): version = "2.6.2";      break;
+        case(0x254000): version = "2.5.1.4";    break;
         case(0x6C0000): version = "2.0.3.2";    break;
 
         default:        version = "UNDETECTED"; MessageBox.Show(timer.Form, "Ultimate-Doom autosplitter startup failure. \nI could not recognize what the version of the game you are running", "Ultimate-Doom startup failure", MessageBoxButtons.OK, MessageBoxIcon.Error); break;
     }
-	
-    	vars.timerRunning = 0;
+
+    vars.timerRunning = 0;
 	vars.splitsCurrent = 0;
 	vars.splitsTemp = 0;
 	vars.splitsTotal = 0;
@@ -137,9 +137,8 @@ isLoading
 
 update
 {
-    if(version.Contains("UNDETECTED")){
+    if(version.Contains("UNDETECTED"))
         return false;
-    }
 }
 
 shutdown
