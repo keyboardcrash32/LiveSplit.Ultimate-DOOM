@@ -21,6 +21,6 @@ If you have any questions then feel free to write them to me(Discord - keyboardc
 
 ## Features
  - Automatic splitting
- - Automatic Timer Start, Stop and Resetting, all of which can be toggled
+ - Automatic Timer Start, Splitting and Resetting, all of which can be toggled
  - Pauses on loads
  - Splitting Chapters only
