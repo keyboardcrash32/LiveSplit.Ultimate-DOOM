@@ -4,7 +4,7 @@ Autosplitter for almost every speedrunning source ports
 If you have any questions then feel free to write them to me(Discord - keyboardcrash#7833)
 
 
-## Instalation
+## Installation
 **First way (recommended):**
  1. Right click Livesplit
  2. Select "Edit Splits"
