@@ -1,5 +1,16 @@
-// Ultimate DOOM autosplitter
-// Working only on latest versions of source ports
+// ULTIMATE DOOM AUTOSPLITTER
+// WADS TESTED:
+// - Doom.wad
+// - Doom2.wad
+// - Plutonia.wad
+// - TNT.wad
+// - Variety of custom wads
+//
+// HOW TO USE: https://github.com/rogender/LiveSplit.Ultimate-DOOM/blob/main/README.md
+// PLEASE REPORT THE PROBLEMS TO EITHER THE ISSUES SECTION IN THE GITHUB REPOSITORY ABOVE
+//
+// !! NOTE !! WORKING ONLY ON LATEST VERSION OF SOURCE PORTS
+
 
 state("crispy-doom")
 {
@@ -65,11 +76,11 @@ init
 
     switch(modules.First().ModuleMemorySize)
     {
-        case(0x165000): version = "3.0.1";      break;
-        case(0x391000): version = "5.11.1";     break;
-        case(0x284000): version = "2.6.2";      break;
-        case(0x254000): version = "2.5.1.4";    break;
-        case(0x6C0000): version = "2.0.3.2";    break;
+        case 0x165000: version = "3.0.1";      break;
+        case 0x391000: version = "5.11.1";     break;
+        case 0x284000: version = "2.6.2";      break;
+        case 0x254000: version = "2.5.1.4";    break;
+        case 0x6C0000: version = "2.0.3.2";    break;
 
         default:        version = "UNDETECTED"; MessageBox.Show(timer.Form, "Ultimate-Doom autosplitter startup failure. \nI could not recognize what the version of the game you are running", "Ultimate-Doom startup failure", MessageBoxButtons.OK, MessageBoxIcon.Error); break;
     }
