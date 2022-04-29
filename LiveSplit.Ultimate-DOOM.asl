@@ -81,7 +81,7 @@ init
         case 0x254000: version = "2.5.1.4";    break;
         case 0x6C0000: version = "2.0.3.2";    break;
 
-        default:        version = "UNDETECTED"; MessageBox.Show(timer.Form, "Ultimate-Doom autosplitter startup failure. \nI could not recognize what the version of the game you are running", "Ultimate-Doom startup failure", MessageBoxButtons.OK, MessageBoxIcon.Error); break;
+        default:       version = "UNDETECTED"; MessageBox.Show(timer.Form, "Ultimate-Doom autosplitter startup failure. \nI could not recognize what the version of the game you are running", "Ultimate-Doom startup failure", MessageBoxButtons.OK, MessageBoxIcon.Error); break;
     }
 }
 
