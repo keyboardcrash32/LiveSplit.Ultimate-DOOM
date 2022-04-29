@@ -11,8 +11,7 @@
 //
 // !! NOTE !! WORKING ONLY ON LATEST VERSION OF SOURCE PORTS
 
-
-state("crispy-doom")
+state("crispy-doom", "5.11.1")
 {
     int map:                    "crispy-doom.exe", 0x1A01CC;
     int menuvalue:              "crispy-doom.exe", 0x1A1890;
@@ -21,7 +20,7 @@ state("crispy-doom")
     int chapter:                "crispy-doom.exe", 0x19F76C;
 }
 
-state("chocolate-doom")
+state("chocolate-doom", "3.0.1")
 {
     int map:                    "chocolate-doom.exe", 0x1231E4;
     int menuvalue:              "chocolate-doom.exe", 0x11A31C;
@@ -30,7 +29,7 @@ state("chocolate-doom")
     int chapter:                "chocolate-doom.exe", 0x1236F4;
 }
 
-state("glboom-plus")
+state("glboom-plus", "2.5.1.4")
 {
     int map:                    "glboom-plus.exe", 0x1A2FD4;
     int menuvalue:              "glboom-plus.exe", 0x215818;
@@ -39,7 +38,7 @@ state("glboom-plus")
     int chapter:                "glboom-plus.exe", 0x1A2FD8;
 }
 
-state("prboom-plus")
+state("prboom-plus", "2.6.2")
 {
     int map:                    "prboom-plus.exe", 0x115988;
     int menuvalue:              "prboom-plus.exe", 0x18D310;
@@ -48,7 +47,7 @@ state("prboom-plus")
     int chapter:                "prboom-plus.exe", 0x16CD38;
 }
 
-state("cndoom")
+state("cndoom", "2.0.3.2")
 {
     int map:                    "cndoom.exe", 0x1173C4;
     int menuvalue:              "cndoom.exe", 0x117BD8;
@@ -72,7 +71,7 @@ startup
 
 init
 {
-    print("ModuleMemorySize - 0x" + (modules.First().ModuleMemorySize).ToString("X"));
+    print("[Ultimate-DOOM ASL] ModuleMemorySize - 0x" + (modules.First().ModuleMemorySize).ToString("X"));
 
     switch(modules.First().ModuleMemorySize)
     {
@@ -84,66 +83,26 @@ init
 
         default:        version = "UNDETECTED"; MessageBox.Show(timer.Form, "Ultimate-Doom autosplitter startup failure. \nI could not recognize what the version of the game you are running", "Ultimate-Doom startup failure", MessageBoxButtons.OK, MessageBoxIcon.Error); break;
     }
-
-    vars.timerRunning = 0;
-	vars.splitsCurrent = 0;
-	vars.splitsTemp = 0;
-	vars.splitsTotal = 0;
 }
 
 start
 {
-    if(current.map == 1 && current.menuvalue == 0 && vars.timerRunning == 0 && current.playerHealth != 0 && settings["start"])
-    {
-        vars.timerRunning = 1;
-        vars.splitsCurrent = 0;
-		vars.splitsTemp = 0;
-		vars.splitsTotal = 0;
-        return true;
-    }
+    return (current.map == 1 && current.menuvalue == 0 && current.playerHealth != 0 && settings["start"]);
 }
 
 split
 {
-    if((current.map > old.map || current.chapter > old.chapter) && settings["split"] && !settings["chaptersplit"])
-    {
-        vars.splitsTemp = vars.splitsTotal;
-        return true;
-    }
-    if(current.chapter > old.chapter && settings["chaptersplit"] && settings["split"])
-    {
-        vars.splitsTemp = vars.splitsTotal;
-        return true;
-    }
+    return (current.chapter > old.chapter && settings["chaptersplit"] && settings["split"]) || ((current.map > old.map || current.chapter > old.chapter) && settings["split"] && !settings["chaptersplit"]);
 }
 
 reset
 {
-    if(current.map < old.map && settings["reset"])
-    {
-        vars.timerRunning = 0;
-        return true;
-    }
-    if(current.playerHealth == 0 && settings["reset"])
-    {
-        vars.timerRunning = 0;
-        return true;
-    }
-    if(current.map == 1 && current.levelTime < old.levelTime && settings["reset"])
-    {
-        vars.timerRunning = 0;
-        return true;
-    }
+    return (current.map < old.map && settings["reset"]) || (current.playerHealth == 0 && settings["reset"]) || (current.map == 1 && current.levelTime < old.levelTime && settings["reset"]);
 }
 
 isLoading
 {
-    if(current.levelTime == old.levelTime && settings["lr"])
-    {
-        return true;
-    } else{
-        return false;
-    }
+    return current.levelTime == old.levelTime && settings["lr"];
 }
 
 update
