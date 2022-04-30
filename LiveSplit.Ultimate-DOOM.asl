@@ -87,7 +87,7 @@ init
 
 start
 {
-    return (current.map == 1 && current.menuvalue == 0 && current.playerHealth != 0 && settings["start"]);
+    return current.map == 1 && current.menuvalue == 0 && current.playerHealth != 0 && settings["start"];
 }
 
 split
