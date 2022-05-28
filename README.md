@@ -8,7 +8,7 @@ If you have any questions then feel free to write them to me(Discord - keyboardc
 **First way (recommended):**
  1. Right click Livesplit
  2. Select "Edit Splits"
- 3. If the "Game Name" field is empty then fill it with "Ultimate Doom", otherwise skip to step 4
+ 3. If the "Game Name" field is empty then fill it with "Ultimate Doom" (or Doom II), otherwise skip to step 4
  4. Activate the splitter by clicking the "Activate" button beside the Splitter information text
 
 **Second way (manual method):**
