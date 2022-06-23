@@ -58,6 +58,8 @@ state("cndoom", "2.0.3.2")
 
 startup
 {
+    vars.Log = (Action<object>)(output => print("[Ultimate-DOOM ASL] " + output));
+
     settings.Add("enablesplit", true, "Enable autosplitter");
     settings.Add("misc", false, "Misc.");
     settings.CurrentDefaultParent = "enablesplit";
@@ -71,7 +73,10 @@ startup
 
 init
 {
-    print("[Ultimate-DOOM ASL] ModuleMemorySize - 0x" + (modules.First().ModuleMemorySize).ToString("X"));
+    
+    refreshRate = 30;
+
+    vars.Log("ModuleMemorySize - 0x" + (modules.First().ModuleMemorySize).ToString("X"));
 
     switch(modules.First().ModuleMemorySize)
     {
