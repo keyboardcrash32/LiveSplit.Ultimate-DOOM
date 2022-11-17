@@ -13,11 +13,11 @@
 
 state("crispy-doom", "5.12.0")
 {
-    int map:                    "crispy-doom.exe", 0x1A31CC;
-    int inMenu:                 "crispy-doom.exe", 0x1A2640;
-    int playerHealth:           "crispy-doom.exe", 0xAB354;
-    int levelTime:              "crispy-doom.exe", 0x10FB70;
-    int chapter:                "crispy-doom.exe", 0x1A276C;
+    int map:                    "crispy-doom.exe", 0x1B3BBC;
+    int inMenu:                 "crispy-doom.exe", 0x1B2EA8;
+    int playerHealth:           "crispy-doom.exe", 0xBD788;
+    int levelTime:              "crispy-doom.exe", 0x11BE70;
+    int chapter:                "crispy-doom.exe", 0x1B300C;
 }
 
 state("chocolate-doom", "3.0.1")
